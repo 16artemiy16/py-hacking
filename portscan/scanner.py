@@ -1,5 +1,5 @@
 import socket
-
+from progressbar import Progressbar
 
 def scan_port(addr, port, config):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -22,6 +22,9 @@ def scan_port(addr, port, config):
 
 
 def scan_ports(host, ports, config):
+    if config['log_t_bunch']:
+        progress = Progressbar(len(ports))
+
     addr = socket.gethostbyname(host)
     socket.setdefaulttimeout(1)
 
@@ -34,6 +37,9 @@ def scan_ports(host, ports, config):
             opened_ports.append(port)
         else:
             closed_ports.append(port)
+
+        if config['log_t_bunch']:
+            progress.next()
 
     if config['log_t_bunch']:
         if config['log_v_opened']:
