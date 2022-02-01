@@ -1,4 +1,5 @@
 import sys
+import threading
 
 class Progressbar:
     JUMP_LEFT_SEQ = '\u001b[100D'
