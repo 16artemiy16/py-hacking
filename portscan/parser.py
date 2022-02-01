@@ -46,6 +46,10 @@ def parse_args():
     # Exclude repeatable ports
     ports = list(set(ports))
 
+    # Set default ports if they are not set
+    if len(ports) == 0:
+        ports = list(range(1, 65536))
+
     log_all_ports = not args['only_opened'] and not args['only_closed']
 
     return {
