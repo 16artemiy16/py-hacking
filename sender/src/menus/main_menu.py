@@ -57,7 +57,6 @@ class MainMenu:
                 self._handle_hovered_action()
 
             self._print_menu()
-            self.stdscr.addstr(str(key), self.color.GREEN_BLACK)
 
     @property
     def _can_cursor_move_bottom(self):
