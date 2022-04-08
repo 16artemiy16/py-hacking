@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import (QLabel, QLineEdit, QWidget, QGridLayout, QPushButto
                              QHBoxLayout, QProgressBar, QScrollArea, QListWidget, QTabWidget)
 
 from .ParsePage import ParsePage
+from .MainTabBar import MainTabBar
 
 
 class MainWindow(QWidget):
@@ -13,8 +14,20 @@ class MainWindow(QWidget):
         self.setGeometry(0, 0, 750, 500)
         self.setWindowTitle('Links Parser')
         self.setup_widgets()
+
+        self.create_new_parsing_tab()
+
         self.show()
 
     def setup_widgets(self):
-        self.main_layout = ParsePage().ui
+        self.tab_bar = MainTabBar()
+        self.tab_bar.create_page_clicked.connect(self.create_new_parsing_tab)
+
+        self.main_layout = QVBoxLayout()
+        self.main_layout.addWidget(self.tab_bar.ui)
         self.setLayout(self.main_layout)
+
+    def create_new_parsing_tab(self):
+        widget = QWidget()
+        widget.setLayout(ParsePage().ui)
+        self.tab_bar.add_tab(widget, f'New')
