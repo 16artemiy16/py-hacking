@@ -4,6 +4,11 @@ from PyQt5.QtCore import pyqtSlot, pyqtSignal
 
 class MainTabBar(QWidget):
     create_page_clicked = pyqtSignal()
+    _styles = '''
+        QTabWidget::tab-bar {
+            alignment: left;
+        }
+        '''
 
     def __init__(self):
         super().__init__()
@@ -15,6 +20,8 @@ class MainTabBar(QWidget):
 
     def _init(self):
         self._tab_bar = QTabWidget()
+        self._tab_bar.setTabsClosable(True)
+        self._tab_bar.setStyleSheet(self._styles)
 
         self._plus_btn = QToolButton(self)
         self._plus_btn.setText('+')
