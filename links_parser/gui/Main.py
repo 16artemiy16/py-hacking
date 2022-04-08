@@ -1,4 +1,5 @@
-from PyQt5.QtWidgets import QLabel, QLineEdit, QWidget, QGridLayout, QPushButton, QVBoxLayout, QHBoxLayout
+from PyQt5.QtWidgets import (QLabel, QLineEdit, QWidget, QGridLayout, QPushButton, QVBoxLayout,
+                             QHBoxLayout, QProgressBar, QScrollArea, QListWidget)
 from PyQt5.QtCore import Qt
 
 import sys, os
@@ -13,33 +14,44 @@ class MainWindow(QWidget):
         self.init_ui()
 
     def init_ui(self):
-        self.setGeometry(500, 500, 300, 300)
+        self.setGeometry(0, 0, 750, 500)
         self.setWindowTitle('Links Parser')
         self.setup_widgets()
         self.show()
 
     def setup_widgets(self):
-        main_layout = QVBoxLayout()
-        main_layout.addLayout(self.input_layout)
+        self.main_layout = QVBoxLayout()
+        self.set_input_layout()
+        self.set_results_layout()
+        self.setLayout(self.main_layout)
 
-        self.setLayout(main_layout)
-
-    @property
-    def input_layout(self):
+    def set_input_layout(self):
         """ Input layout """
-        input_layout = QHBoxLayout()
-        input_layout.setAlignment(Qt.AlignTop)
+        self.input_layout = QHBoxLayout()
+        self.input_layout.setAlignment(Qt.AlignTop)
 
-        url_input = QLineEdit()
-        url_input.setPlaceholderText('Enter URL to parse')
+        self.url_input = QLineEdit()
+        self.url_input.setPlaceholderText('Enter URL to parse')
 
-        parse_btn = QPushButton('Parse')
-        parse_btn.clicked.connect(lambda: self.parse_links(url_input.text()))
+        self.parse_btn = QPushButton('Parse')
+        self.parse_btn.clicked.connect(lambda: self.parse_links(self.url_input.text()))
 
-        input_layout.addWidget(url_input)
-        input_layout.addWidget(parse_btn)
+        self.input_layout.addWidget(self.url_input)
+        self.input_layout.addWidget(self.parse_btn)
 
-        return input_layout
+        self.main_layout.addLayout(self.input_layout)
+
+    def set_results_layout(self):
+        self.results_layout = QVBoxLayout()
+        self.results_layout.setAlignment(Qt.AlignTop)
+
+        self.results_list = QListWidget()
+        self.results_layout.addWidget(self.results_list)
+
+        self.main_layout.addLayout(self.results_layout)
+
 
     def parse_links(self, url):
-        pass
+        result = LinksExtractor(url).fetch()
+        for url in result.external:
+            self.results_list.addItem(url)

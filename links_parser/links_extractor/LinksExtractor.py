@@ -11,7 +11,7 @@ class LinksExtractor:
 
     def fetch(self):
         res = urlopen(self._url)
-        content = res.read().decode(res.headers.get_content_charset())
+        content = res.read().decode(res.headers.get_content_charset() or 'utf-8')
         raw_links = LinksExtractor._find_links_in_text(content)
         links = self._process_raw_links(raw_links)
         return LinksExtractorResult(self._url, links)
