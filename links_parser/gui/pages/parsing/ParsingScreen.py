@@ -1,9 +1,9 @@
 from PyQt5.QtWidgets import (QWidget, QVBoxLayout)
-from .PageParsingTabContent import PageParsingTabContent
-from links_parser.gui.pages.PageParsingTabs import PageParsingTabs
+from .ParsingTabContent import ParsingTabContent
+from links_parser.gui.pages.parsing.ParsingTabs import ParsingTabs
 
 
-class PageParsing(QWidget):
+class ParsingScreen(QWidget):
     def __init__(self):
         super().__init__()
         self.init_ui()
@@ -17,7 +17,7 @@ class PageParsing(QWidget):
 
 
     def setup_widgets(self):
-        self.tab_bar = PageParsingTabs()
+        self.tab_bar = ParsingTabs()
         self.tab_bar.create_page_clicked.connect(self.create_new_parsing_tab)
 
         self.main_layout = QVBoxLayout()
@@ -26,5 +26,5 @@ class PageParsing(QWidget):
 
     def create_new_parsing_tab(self):
         widget = QWidget()
-        widget.setLayout(PageParsingTabContent().ui)
+        widget.setLayout(ParsingTabContent().ui)
         self.tab_bar.add_tab(widget, f'New')

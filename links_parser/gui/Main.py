@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import (QWidget, QVBoxLayout)
 
-from .pages.PageParsing import PageParsing
+from .pages.parsing import ParsingScreen
 
 
 class MainWindow(QWidget):
@@ -17,7 +17,7 @@ class MainWindow(QWidget):
     def setup_widgets(self):
         self.main_layout = QVBoxLayout()
 
-        self.parsing_page = PageParsing()
+        self.parsing_page = ParsingScreen()
         self.main_layout.addWidget(self.parsing_page)
 
         self.setLayout(self.main_layout)
