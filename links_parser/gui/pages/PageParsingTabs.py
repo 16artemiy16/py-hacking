@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QWidget, QTabWidget, QToolButton
 from PyQt5.QtCore import pyqtSlot, pyqtSignal
 
 
-class MainTabBar(QWidget):
+class PageParsingTabs(QWidget):
     create_page_clicked = pyqtSignal()
     _styles = '''
         QTabWidget::tab-bar {

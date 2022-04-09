@@ -7,7 +7,7 @@ sys.path.insert(0, os.path.abspath('..'))
 from links_parser.links_extractor import LinksExtractor
 
 
-class ParsePage(QWidget):
+class PageParsingTabContent(QWidget):
     def __init__(self):
         super().__init__()
         self._init_ui()
