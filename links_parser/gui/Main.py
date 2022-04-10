@@ -16,6 +16,7 @@ class MainWindow(QWidget):
 
     def setup_widgets(self):
         self.main_layout = QVBoxLayout()
+        self.main_layout.setContentsMargins(0, 0, 0, 0)
 
         self.parsing_page = ParsingScreen()
         self.main_layout.addWidget(self.parsing_page)

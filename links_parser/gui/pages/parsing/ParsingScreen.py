@@ -21,6 +21,8 @@ class ParsingScreen(QWidget):
         self.tab_bar.create_page_clicked.connect(self.create_new_parsing_tab)
 
         self.main_layout = QVBoxLayout()
+        self.main_layout.setContentsMargins(0, 0, 0, 0)
+
         self.main_layout.addWidget(self.tab_bar.ui)
         self.setLayout(self.main_layout)
 
