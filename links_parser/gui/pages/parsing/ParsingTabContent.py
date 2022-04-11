@@ -23,15 +23,16 @@ class ParsingTabContent(QWidget):
         self.setLayout(self.main_layout)
 
     def _set_input_layout(self):
-        """ Input layout """
         self.input_layout = QHBoxLayout()
         self.input_layout.setAlignment(Qt.AlignTop)
 
         self.url_input = QLineEdit()
         self.url_input.setPlaceholderText('Enter URL to parse')
+        self.url_input.textChanged.connect(self._watch_url_change)
 
         self.parse_btn = QPushButton('Parse')
         self.parse_btn.clicked.connect(lambda: self._parse_links(self.url_input.text()))
+        self.parse_btn.setEnabled(False)
 
         self.input_layout.addWidget(self.url_input)
         self.input_layout.addWidget(self.parse_btn)
@@ -46,6 +47,10 @@ class ParsingTabContent(QWidget):
         self.results_layout.addWidget(self.results_list)
 
         self.main_layout.addLayout(self.results_layout)
+
+    def _watch_url_change(self, value):
+        is_empty = len(value.strip()) == 0
+        self.parse_btn.setEnabled(not is_empty)
 
     def _parse_links(self, url):
         result = LinksExtractor(url).fetch()

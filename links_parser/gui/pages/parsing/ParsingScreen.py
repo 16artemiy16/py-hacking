@@ -9,10 +9,7 @@ class ParsingScreen(QWidget):
         self.init_ui()
 
     def init_ui(self):
-        self.setGeometry(0, 0, 750, 500)
-        self.setWindowTitle('Links Parser')
         self.setup_widgets()
-
         self.create_new_parsing_tab()
 
 
