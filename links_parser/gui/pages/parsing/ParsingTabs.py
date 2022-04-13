@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QTabWidget, QToolButton
-from PyQt5.QtCore import pyqtSlot, pyqtSignal
+from PyQt5.QtCore import pyqtSignal
 
 
 class ParsingTabs(QWidget):

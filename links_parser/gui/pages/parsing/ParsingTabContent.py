@@ -53,6 +53,7 @@ class ParsingTabContent(QWidget):
         self.parse_btn.setEnabled(not is_empty)
 
     def _parse_links(self, url):
+        self.results_list.clear()
         result = LinksExtractor(url).fetch()
         for url in result.external:
             self.results_list.addItem(url)
