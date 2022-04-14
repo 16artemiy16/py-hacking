@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QPushButton, QListWidget
 from PyQt5.QtCore import Qt
+import threading
 
 import sys, os
 sys.path.insert(0, os.path.abspath('..'))
@@ -31,7 +32,7 @@ class ParsingTabContent(QWidget):
         self.url_input.textChanged.connect(self._watch_url_change)
 
         self.parse_btn = QPushButton('Parse')
-        self.parse_btn.clicked.connect(lambda: self._parse_links(self.url_input.text()))
+        self.parse_btn.clicked.connect(lambda: self._parse_links_threading(self.url_input.text()))
         self.parse_btn.setEnabled(False)
 
         self.input_layout.addWidget(self.url_input)
@@ -52,8 +53,12 @@ class ParsingTabContent(QWidget):
         is_empty = len(value.strip()) == 0
         self.parse_btn.setEnabled(not is_empty)
 
-    def _parse_links(self, url):
+    def _parse_links_sync(self, url):
         self.results_list.clear()
         result = LinksExtractor(url).fetch()
         for url in result.external:
             self.results_list.addItem(url)
+
+    def _parse_links_threading(self, url):
+        t = threading.Thread(target=self._parse_links_sync, args=(url,))
+        t.start()
