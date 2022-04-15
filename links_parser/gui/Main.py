@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import (QMainWindow, QVBoxLayout, QStatusBar, QWidget, QMenu, QAction)
+from PyQt5.QtWidgets import (QMainWindow, QVBoxLayout, QStatusBar, QWidget, QLabel, QAction)
 from PyQt5.QtCore import pyqtSignal
 
 from .pages.parsing import ParsingScreen
