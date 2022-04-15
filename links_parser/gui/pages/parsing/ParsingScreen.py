@@ -4,14 +4,15 @@ from links_parser.gui.pages.parsing.ParsingTabs import ParsingTabs
 
 
 class ParsingScreen(QWidget):
-    def __init__(self):
+    def __init__(self, new_tab_emitter):
         super().__init__()
         self.init_ui()
+
+        new_tab_emitter.connect(self.create_new_parsing_tab)
 
     def init_ui(self):
         self.setup_widgets()
         self.create_new_parsing_tab()
-
 
     def setup_widgets(self):
         self.tab_bar = ParsingTabs()
@@ -26,4 +27,4 @@ class ParsingScreen(QWidget):
     def create_new_parsing_tab(self):
         widget = QWidget()
         widget.setLayout(ParsingTabContent().ui)
-        self.tab_bar.add_tab(widget, f'New')
+        self.tab_bar.add_tab(widget, f'New', active=True)

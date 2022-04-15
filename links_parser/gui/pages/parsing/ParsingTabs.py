@@ -29,5 +29,7 @@ class ParsingTabs(QWidget):
         self._tab_bar.setCornerWidget(self._plus_btn)
         self._plus_btn.clicked.connect(lambda: self.create_page_clicked.emit())
 
-    def add_tab(self, *args):
-        self._tab_bar.addTab(*args)
+    def add_tab(self, *args, active=False):
+        idx = self._tab_bar.addTab(*args)
+        if active:
+            self._tab_bar.setCurrentIndex(idx)
