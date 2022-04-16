@@ -1,4 +1,7 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
-
+    <qresource>
+        <file alias="network.svg">assets/network.svg</file>
+        <file alias="settings.svg">assets/settings.svg</file>
+    </qresource>
 </RCC>
