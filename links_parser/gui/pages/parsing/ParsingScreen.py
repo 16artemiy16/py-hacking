@@ -5,7 +5,7 @@ from links_parser.gui.pages.parsing.ParsingTabs import ParsingTabs
 
 class ParsingScreen(QWidget):
     def __init__(self, new_tab_emitter):
-        super().__init__()
+        super(ParsingScreen, self).__init__()
         self.init_ui()
 
         new_tab_emitter.connect(self.create_new_parsing_tab)

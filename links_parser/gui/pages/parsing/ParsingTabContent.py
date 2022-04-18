@@ -10,7 +10,7 @@ from links_parser.links_extractor import LinksExtractor
 
 class ParsingTabContent(QWidget):
     def __init__(self):
-        super().__init__()
+        super(ParsingTabContent, self).__init__()
         self._init_ui()
 
     @property

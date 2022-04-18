@@ -11,7 +11,7 @@ class ParsingTabs(QWidget):
         '''
 
     def __init__(self):
-        super().__init__()
+        super(ParsingTabs, self).__init__()
         self._init()
 
     @property
